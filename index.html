@@ -1,0 +1,152 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>Faik ve Fikret</title>
+<style>
+  body {
+    background-color: #333;
+    color: white;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    text-align: center;
+  }
+
+  h1 {
+    font-weight: normal;
+    margin-top: 30px;
+    margin-bottom: 10px;
+  }
+  .hikaye-ozeti {
+    width: 70%;
+    margin: 0 auto 30px auto;
+    font-size: 14px;
+    color: #ccc;
+    line-height: 1.5;
+  }
+
+  #kutu {
+    width: 80%;
+    margin: 20px auto;
+    position: relative;
+    max-width: 800px;
+  }
+
+  video {
+    width: 100%;
+    display: block;
+    background: black;
+  }
+
+  #faikVideo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0; 
+  }
+
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    background-color: #eee;
+    border: none;
+    border-radius: 4px;
+    color: #333;
+  }
+
+  .durum {
+    margin-top: 20px;
+    font-size: 18px;
+  }
+</style>
+</head>
+<body>
+
+  <h1>Faik ve Fikret</h1>
+
+  <div class="hikaye-ozeti">
+    <p>
+      Bu proje, aynı olayı yaşayan tek yumurta ikizlerinin zihinsel farklarını göstermektedir.<br>
+      <strong>Fikret</strong> anı yaşayan normal bir bireyken, <strong>Faik</strong> OKB (Obsesif Kompulsif Bozukluk) ile mücadele eden endişeli bir karakterdir.
+    </p>
+  </div>
+
+  <button id="baslatBtn">Videoyu Başlat</button>
+  
+  <div id="kutu">
+    <video id="fikretVideo" src="final-fikret.mp4" playsinline loop></video>
+    <video id="faikVideo" src="final-faik.mp4" playsinline loop></video>
+  </div>
+
+  <div class="durum">
+    <span id="fikretYazi" style="font-weight:bold; color:white;">A - Fikret </span> | 
+    <span id="faikYazi" style="color:#666;">B - Faik </span>
+  </div>
+
+  <p style="font-size: 14px; color: #888;">Klavye: A ve B tuşlarını kullanın</p>
+
+<script>
+  var fikret = document.getElementById("fikretVideo");
+  var faik = document.getElementById("faikVideo");
+  
+  var buton = document.getElementById("baslatBtn");
+  
+  var yazi1 = document.getElementById("fikretYazi");
+  var yazi2 = document.getElementById("faikYazi");
+  
+  var calisiyor = false;
+
+  buton.onclick = function() {
+    fikret.play();
+    faik.play();
+    
+    fikret.muted = false;
+    faik.muted = true;
+    
+    calisiyor = true;
+    buton.style.display = "none";
+    
+    document.body.style.backgroundColor = "#2f3640"; 
+  };
+
+  document.addEventListener("keydown", function(e) {
+    if(calisiyor == false) return;
+
+    if(e.key === "a" || e.key === "A") 
+    {
+      fikret.style.opacity = 1;
+      faik.style.opacity = 0;
+      
+      fikret.muted = false;
+      faik.muted = true;
+      
+      document.body.style.backgroundColor = "#2f3640"; 
+      
+      yazi1.style.color = "white";
+      yazi1.style.fontWeight = "bold";
+      yazi2.style.color = "#666";
+      yazi2.style.fontWeight = "normal";
+    }
+
+    if(e.key === "b" || e.key === "B") {
+      fikret.style.opacity = 0;
+      faik.style.opacity = 1;
+      
+      fikret.muted = true;
+      faik.muted = false;
+      
+      document.body.style.backgroundColor = "#352e2e"; 
+
+      yazi1.style.color = "#666";
+      yazi1.style.fontWeight = "normal";
+      yazi2.style.color = "white";
+      yazi2.style.fontWeight = "bold";
+    }
+  });
+</script>
+
+</body>
+</html>
